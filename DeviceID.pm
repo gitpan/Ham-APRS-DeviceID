@@ -76,7 +76,7 @@ our @EXPORT_OK = (
 ##	
 ##);
 
-our $VERSION = '1.02';
+our $VERSION = '1.03';
 
 
 # Preloaded methods go here.
@@ -165,6 +165,12 @@ my %response = (
 	'd7' => {
 		'vendor' => 'Kenwood',
 		'model' => 'TH-D7',
+		'class' => 'ht',
+		'messaging' => 1,
+	},
+	'd72' => {
+		'vendor' => 'Kenwood',
+		'model' => 'TH-D72',
 		'class' => 'ht',
 		'messaging' => 1,
 	},
@@ -301,6 +307,12 @@ my %fixed_dstcalls = (
 		'class' => 'mobile',
 		'os' => 'ipad',
 	},
+	'APRNOW' => {
+		'vendor' => 'Gregg Wonderly, W5GGW',
+		'model' => 'APRSNow',
+		'class' => 'mobile',
+		'os' => 'ipad',
+	},
 	'APZ186' => {
 		'vendor' => 'IW3FQG',
 		'model' => 'UIdigi',
@@ -318,6 +330,17 @@ my %fixed_dstcalls = (
 		'model' => 'UIdigi',
 		'class' => 'digi',
 		'version' => '19'
+	},
+	'APKRAM' => {
+		'vendor' => 'kramstuff.com',
+		'model' => 'Ham Tracker',
+		'class' => 'mobile',
+		'os' => 'iphone',
+	},
+	'APK003' => {
+		'vendor' => 'Kenwood',
+		'model' => 'TH-D72',
+		'class' => 'ht',
 	},
 );
 
@@ -776,7 +799,9 @@ sub identify($)
 		if (!defined $p->{'comment'}) {
 			return _a_err($p, 'mice_no_comment');
 		}
-		if ($p->{'comment'} =~ s/^>//) {
+		if ($p->{'comment'} =~ s/^>(.*)=$/$1/) {
+			$resp = 'd72';
+		} elsif ($p->{'comment'} =~ s/^>//) {
 			$resp = 'd7';
 		} elsif ($p->{'comment'} =~ s/^\](.*)=$/$1/) {
 			$resp = 'd710';

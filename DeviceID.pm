@@ -76,8 +76,7 @@ our @EXPORT_OK = (
 ##	
 ##);
 
-our $VERSION = '1.04';
-
+our $VERSION = '1.06';
 
 # Preloaded methods go here.
 
@@ -214,6 +213,20 @@ my %response = (
 		'model' => 'TinyTrak4',
 		'class' => 'tracker',
 	},
+	'kissoz' => {
+		'vendor' => 'OZ1EKD, OZ7HVO',
+		'model' => 'KissOZ',
+		'class' => 'tracker',
+	},
+	'anyfrog' => {
+		'vendor' => 'HinzTec',
+		'model' => 'anyfrog',
+		'class' => 'tracker',
+	},
+	'unknown' => {
+		'vendor' => 'Unknown',
+		'model' => 'Other Mic-E',
+	},
 );
 
 my %fixed_dstcalls = (
@@ -247,6 +260,12 @@ my %fixed_dstcalls = (
 	'APZMDR' => {
 		'vendor' => 'Open Source',
 		'model' => 'HaMDR',
+		'class' => 'tracker',
+		'os' => 'embedded',
+	},
+	'APZTKP' => {
+		'vendor' => 'Nick Hanks, N0LP',
+		'model' => 'TrackPoint',
 		'class' => 'tracker',
 		'os' => 'embedded',
 	},
@@ -301,6 +320,12 @@ my %fixed_dstcalls = (
 		'class' => 'software',
 		'os' => 'Windows',
 	},
+	'APSAR' => {
+		'vendor' => 'ZL4FOX',
+		'model' => 'SARTrack',
+		'class' => 'software',
+		'os' => 'Windows',
+	},
 	'APN102' => {
 		'vendor' => 'Gregg Wonderly, W5GGW',
 		'model' => 'APRSNow',
@@ -345,10 +370,23 @@ my %fixed_dstcalls = (
 );
 
 my @dstcall_regexps = (
+	[ 'APAM(\\d+)', {
+		'vendor' => 'Altus Metrum',
+		'model' => 'AltOS',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
 	[ 'APJI(\\d+)', {
 		'vendor' => 'Peter Loveall, AE5PL',
 		'model' => 'jAPRSIgate',
 		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	[ 'APBPQ(\\d)', {
+		'vendor' => 'John Wiseman, G8BPQ',
+		'model' => 'BPQ32',
+		'class' => 'software',
+		'os' => 'Windows',
 		'version_regexp' => 1,
 	} ],
 	[ 'APD(\\d+)', {
@@ -358,11 +396,53 @@ my @dstcall_regexps = (
 		'os' => 'Linux/Unix',
 		'version_regexp' => 1,
 	} ],
+	[ 'APDG(\\d+)', {
+		'vendor' => 'Jonathan, G4KLX',
+		'model' => 'ircDDB Gateway',
+		'class' => 'dstar',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDI(\\d+)', {
+		'vendor' => 'Bela, HA5DI',
+		'model' => 'DIXPRS',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDS(\\d+)', {
+		'vendor' => 'SP9UOB',
+		'model' => 'dsDIGI',
+		'os' => 'embedded',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDST(\\d)', {
+		'vendor' => 'SP9UOB',
+		'model' => 'dsTracker',
+		'os' => 'embedded',
+		'version_regexp' => 1,
+	} ],
 	[ 'APDU(\\d+)', {
 		'vendor' => 'JA7UDE',
 		'model' => 'U2APRS',
 		'class' => 'mobile',
 		'os' => 'Android',
+		'version_regexp' => 1,
+	} ],
+	[ 'APDW(\\d+)', {
+		'vendor' => 'WB2OSZ',
+		'model' => 'DireWolf',
+		'version_regexp' => 1,
+	} ],
+	[ 'APMG(\\d+)', {
+		'vendor' => 'Alex, AB0TJ',
+		'model' => 'MiniGate',
+		'class' => 'software',
+		'os' => 'Netduino',
+		'version_regexp' => 1,
+	} ],
+	[ 'APJY(\\d+)', {
+		'vendor' => 'KA2DDO',
+		'model' => 'YAAC',
+		'class' => 'software',
 		'version_regexp' => 1,
 	} ],
 	[ 'AP4R(\\d+)', {
@@ -457,7 +537,15 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
-	[ 'APHH(\d)', {
+	[ 'APHAX(\\d)', {
+		'vendor' => 'PY2UEP',
+		'model' => 'SM2APRS SondeMonitor',
+		'class' => 'software',
+		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APHH(\\d)', {
 		'vendor' => 'Steven D. Bragg, KA9MVA',
 		'model' => 'HamHud',
 		'class' => 'tracker',
@@ -572,6 +660,7 @@ my @dstcall_regexps = (
 	[ 'APNW(\\d{2})', {
 		'vendor' => 'SQ3FYK',
 		'model' => 'WX3in1',
+		'os' => 'embedded',
 		'version_regexp' => 1,
 	} ],
 	
@@ -591,6 +680,13 @@ my @dstcall_regexps = (
 	[ 'APOT([A-Z0-9]{2})', {
 		'vendor' => 'Argent Data Systems',
 		'model' => 'OpenTracker',
+		'class' => 'tracker',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APOZ([A-Z0-9]{2})', {
+		'vendor' => 'OZ1EKD, OZ7HVO',
+		'model' => 'KissOZ',
 		'class' => 'tracker',
 		'version_regexp' => 1,
 	} ],
@@ -642,6 +738,12 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APSC(\\d{2})', {
+		'vendor' => 'OH2MQK, OH7LZB',
+		'model' => 'aprsc',
+		'class' => 'software',
+		'version_regexp' => 1,
+	} ],
 	
 	[ 'APTT([0-9])', {
 		'vendor' => 'Byonics',
@@ -674,6 +776,12 @@ my @dstcall_regexps = (
 		'version_regexp' => 1,
 	} ],
 	
+	[ 'APTR(\\d{2})', {
+		'vendor' => 'Motorola',
+		'model' => 'MotoTRBO',
+		'version_regexp' => 1,
+	} ],
+	
 	[ 'APU(2\\d.)(.{0,1})', {
 		'vendor' => 'Roger Barker, G4IDE',
 		'model' => 'UI-View32',
@@ -686,6 +794,12 @@ my @dstcall_regexps = (
 		'model' => 'UI-View16',
 		'class' => 'software',
 		'os' => 'Windows',
+		'version_regexp' => 1,
+	} ],
+	
+	[ 'APUDR(\\d)', {
+		'vendor' => 'NW Digital Radio',
+		'model' => 'UDR',
 		'version_regexp' => 1,
 	} ],
 	
@@ -846,6 +960,12 @@ sub identify($)
 			$resp = 'tt3';
 		} elsif ($p->{'comment'} =~ s/^\'(.*)\|4$/$1/) {
 			$resp = 'tt4';
+		} elsif ($p->{'comment'} =~ s/^[`\'](.*)\*[0-9]$/$1/) {
+			$resp = 'kissoz';
+		} elsif ($p->{'comment'} =~ s/^[`\'](.*)^.$/$1/) {
+			$resp = 'anyfrog';
+		} elsif ($p->{'comment'} =~ s/^[`\'](.*)~.$/$1/) {
+			$resp = 'unknown';
 		}
 		if ($resp) {
 			$p->{'deviceid'} = $response{$resp};

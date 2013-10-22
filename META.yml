@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Ham-APRS-DeviceID
-version:            1.06
+version:            1.07
 abstract:           APRS device identifier
 author:
     - Heikki Hannikainen <hessu@hes.iki.fi>
@@ -17,7 +17,7 @@ no_index:
     directory:
         - t
         - inc
-generated_by:       ExtUtils::MakeMaker version 6.55_02
+generated_by:       ExtUtils::MakeMaker version 6.57_05
 meta-spec:
     url:      http://module-build.sourceforge.net/META-spec-v1.4.html
     version:  1.4

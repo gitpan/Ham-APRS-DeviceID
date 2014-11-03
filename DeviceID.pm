@@ -197,7 +197,7 @@ my %response = (
 		'class' => 'ht',
 		'messaging' => 1,
 	},
-		'ft1d' => {
+	'ft1d' => {
 		'vendor' => 'Yaesu',
 		'model' => 'FT-1D',
 		'class' => 'ht',
@@ -209,7 +209,7 @@ my %response = (
 		'class' => 'rig',
 		'messaging' => 1,
 	},
-		'ftm400' => {
+	'ftm400' => {
 		'vendor' => 'Yaesu',
 		'model' => 'FTM-400',
 		'class' => 'rig',
@@ -647,7 +647,7 @@ my @dstcall_regexps = (
 		'class' => 'rig',
 		'version_regexp' => 1,
 	} ],
-	[ 'APY0(\\d{2})', {
+	[ 'APY0(\\d})', {
 		'vendor' => 'Yaesu',
 		'model' => 'FT-1D',
 		'class' => 'rig',

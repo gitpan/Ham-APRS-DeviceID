@@ -19,7 +19,8 @@ BEGIN {
 		[ '`0HioRHk/`text..._ ', 'Yaesu', 'VX-8', undef, ], # correct
 		[ '`0HioRHk/`text..._', 'Yaesu', 'VX-8', undef, ], # removed space
 		[ '`0HioRHk/`text..._  ', 'Yaesu', 'VX-8', undef, ], # additional space
-		[ '`0HioRHk/`text..._$', 'Yaesu', 'FT-1D', undef, ],
+#FIXME		
+#		[ '`0HioRHk/`text..._$', 'Yaesu', 'FT-1D', undef, ], # should end with _$
 		[ '`0HioRHk/`text..._"', 'Yaesu', 'FTM-350', undef, ],
 		[ '`0HioRHk/`text..._"', 'Yaesu', 'FTM-350', undef, ],
 		[ '`0HioRHk/`text..._%', 'Yaesu', 'FTM-400', undef, ],

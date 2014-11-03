@@ -306,7 +306,7 @@ my %fixed_dstcalls = (
 		'messaging' => 1,
 		'version_regexp' => 1,
 	},
-		'APY01D' => {
+	'APY01D' => {
 		'vendor' => 'Yaesu',
 		'model' => 'FT-1D',
 		'class' => 'rig',
@@ -647,7 +647,7 @@ my @dstcall_regexps = (
 		'class' => 'rig',
 		'version_regexp' => 1,
 	} ],
-	[ 'APY0(\\d})', {
+	[ 'APY(\\d.})', {
 		'vendor' => 'Yaesu',
 		'model' => 'FT-1D',
 		'class' => 'rig',
@@ -1036,8 +1036,12 @@ sub identify($)
 			$resp = 'd700';
 		} elsif ($p->{'comment'} =~ s/^`(.*)_\s*$/$1/) {
 			$resp = 'vx8';
+		} elsif ($p->{'comment'} =~ s/^`(.*)_$$/$1/) {
+                        $resp = 'ft1d';
 		} elsif ($p->{'comment'} =~ s/^`(.*)_"$/$1/) {
 			$resp = 'ftm350';
+		} elsif ($p->{'comment'} =~ s/^`(.*)_%$/$1/) {
+                        $resp = 'ftm400';			
 		} elsif ($p->{'comment'} =~ s/^`(.*)_#$/$1/) {
 			$resp = 'vx8g';
 		} elsif ($p->{'comment'} =~ s/^\'(.*)\|3$/$1/) {
